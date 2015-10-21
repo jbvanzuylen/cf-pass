@@ -4,6 +4,7 @@
   <property name="lib.dir" value="${basedir}/lib" />
   <property name="function.dir" value="${basedir}/functions" />
   <property name="component.dir" value="${basedir}/components" />
+  <property name="resource.dir" value="${basedir}/resources" />
   <property name="railo.dir" value="${basedir}/railo" />
   <property name="build.dir" value="${basedir}/build" />
   <property name="dist.dir" value="${basedir}/dist" />
@@ -35,7 +36,8 @@
 
   <target name="build" depends="compile">
     <jar destfile="${build.dir}/lib/pass-utils.jar">
-      <fileset dir="${build.dir}/classes" />
+      <zipfileset dir="${build.dir}/classes" />
+      <zipfileset dir="${resource.dir}" prefix="resources" />
     </jar>
   </target>
 

@@ -18,6 +18,7 @@ package org.primeoservices.cfpass;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.Security;
@@ -104,7 +105,7 @@ public class PassUtils
     final X509Certificate cert = (X509Certificate) clientStore.getCertificate(alias);
 
     // Load Apple certificate
-    final FileInputStream appleCertIn = new FileInputStream("E:\\Projects\\Proxyclick\\trunk\\config\\Certificates\\Apple\\AppleWWDRCA.cer");
+    final InputStream appleCertIn = PassUtils.class.getResourceAsStream("/resources/AppleWWDRCA.cer");
     final CertificateFactory appleCertFactory = CertificateFactory.getInstance("X.509");
     final X509Certificate appleCert = (X509Certificate) appleCertFactory.generateCertificate(appleCertIn);
 
