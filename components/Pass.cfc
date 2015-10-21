@@ -411,8 +411,13 @@
 
   <!---
     Build this pass
+
+    @param keyStoreFilePath the path to the keystore file
+    @param keyStorePassword the password to access the keystore
+
+    @return the path to the file containing the pass
   --->
-  <cffunction name="build" access="public" returntype="void" output="false">
+  <cffunction name="build" access="public" returntype="string" output="false">
     <cfargument name="keyStoreFilePath" type="string" required="true" />
     <cfargument name="keyStorePassword" type="string" required="true" />
 
@@ -422,6 +427,7 @@
     <cfset var passUtils = createObject("java", "org.primeoservices.cfpass.PassUtils") />
     <cfset var dirContent = "" />
     <cfset var fileContent = "" />
+    <cfset var filePath = getTempDirectory() & server.separator.file & variables.id & ".pkpass" />
 
     <!--- Generate pass --->
     <cfset pass = serializeJSON(variables.pass) />
@@ -441,6 +447,8 @@
     <cfset passUtils.createSignature(variables.dir, arguments.keyStoreFilePath, arguments.keyStorePassword) />
 
     <!--- Create pass file --->
-    <cfzip action="zip" file="E:\test45.pkpass" source="#variables.dir#">
+    <cfzip action="zip" file="#filePath#" source="#variables.dir#">
+
+    <cfreturn filePath />
   </cffunction>
 </cfcomponent>
