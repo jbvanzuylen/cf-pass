@@ -1,4 +1,4 @@
-﻿<cffunction name="addLocation" access="public" returntype="void" output="false">
+﻿<cffunction name="passAddLocation" returntype="void" output="false">
   <cfargument name="pass" type="pass.Pass" required="true" />
   <cfargument name="longitude" type="string" required="true" />
   <cfargument name="latitude" type="string" required="true" />
