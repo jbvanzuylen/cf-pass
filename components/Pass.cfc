@@ -54,7 +54,7 @@
   <cffunction name="setTeamIdentifier" access="public" returntype="void" output="false">
     <cfargument name="teamIdentifier" type="string" required="true" />
 
-    <!--- Set description --->
+    <!--- Set team identifier --->
     <cfset variables.pass["teamIdentifier"] = arguments.teamIdentifier />
   </cffunction>
 
@@ -114,7 +114,7 @@
   <cffunction name="setOrganizationName" access="public" returntype="void" output="false">
     <cfargument name="organizationName" type="string" required="true" />
 
-    <!--- Set description --->
+    <!--- Set organization name --->
     <cfset variables.pass["organizationName"] = arguments.organizationName />
   </cffunction>
 
@@ -126,7 +126,7 @@
   <cffunction name="setBackgroundColor" access="public" returntype="void" output="false">
     <cfargument name="backgroundColor" type="string" required="true" />
 
-    <!--- Set description --->
+    <!--- Set background color --->
     <cfset variables.pass["backgroundColor"] = arguments.backgroundColor />
   </cffunction>
 
@@ -138,7 +138,7 @@
   <cffunction name="setForegroundColor" access="public" returntype="void" output="false">
     <cfargument name="foregroundColor" type="string" required="true" />
 
-    <!--- Set description --->
+    <!--- Set foreground color --->
     <cfset variables.pass["foregroundColor"] = arguments.foregroundColor />
   </cffunction>
 
@@ -150,7 +150,7 @@
   <cffunction name="setLabelColor" access="public" returntype="void" output="false">
     <cfargument name="labelColor" type="string" required="true" />
 
-    <!--- Set description --->
+    <!--- Set label color --->
     <cfset variables.pass["labelColor"] = arguments.labelColor />
   </cffunction>
 
