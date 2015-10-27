@@ -127,7 +127,7 @@
     <cfargument name="backgroundColor" type="string" required="true" />
 
     <!--- Set background color --->
-    <cfset variables.pass["backgroundColor"] = arguments.backgroundColor />
+    <cfset setColor("backgroundColor", arguments.backgroundColor) />
   </cffunction>
 
   <!---
@@ -139,7 +139,7 @@
     <cfargument name="foregroundColor" type="string" required="true" />
 
     <!--- Set foreground color --->
-    <cfset variables.pass["foregroundColor"] = arguments.foregroundColor />
+    <cfset setColor("foregroundColor", arguments.foregroundColor) />
   </cffunction>
 
   <!---
@@ -151,7 +151,41 @@
     <cfargument name="labelColor" type="string" required="true" />
 
     <!--- Set label color --->
-    <cfset variables.pass["labelColor"] = arguments.labelColor />
+    <cfset setColor("labelColor", arguments.labelColor) />
+  </cffunction>
+
+  <!---
+    Sets a color for this pass
+  --->
+  <cffunction name="setColor" access="private" returntype="void" output="false">
+    <cfargument name="class" type="string" required="true" />
+    <cfargument name="color" type="string" required="true" />
+
+    <!--- Defined local variables --->
+    <cfset var rd = 0 />
+    <cfset var gr = 0 />
+    <cfset var bl = 0 />
+
+    <!--- Defined local variables --->
+    <cfif (len(arguments.color) eq 4) AND (left(arguments.color, 1) eq "##")>
+      <!--- Convert from HEX to RGB --->
+      <cfset rd = inputBaseN(mid(arguments.color, 2, 1) & mid(arguments.color, 2, 1), 16) />
+      <cfset gr = inputBaseN(mid(arguments.color, 3, 1) & mid(arguments.color, 3, 1), 16) />
+      <cfset bl = inputBaseN(mid(arguments.color, 4, 1) & mid(arguments.color, 4, 1), 16) />
+      <!--- Set color --->
+      <cfset variables.pass[arguments.class] = "rgb(#rd#, #gr#, #bl#)" />
+    <cfelseif (len(arguments.color) eq 7) AND (left(arguments.color, 1) eq "##")>
+      <!--- Convert from HEX to RGB --->
+      <cfset rd = inputBaseN(mid(arguments.color, 2, 2), 16) />
+      <cfset gr = inputBaseN(mid(arguments.color, 4, 2), 16) />
+      <cfset bl = inputBaseN(mid(arguments.color, 6, 2), 16) />
+      <!--- Set color --->
+      <cfset variables.pass[arguments.class] = "rgb(#rd#, #gr#, #bl#)" />
+    <cfelseif (len(arguments.color) gt 4) AND (left(arguments.color, 4) eq "rgb(") AND (right(arguments.color, 1) eq ")")>
+      <cfset variables.pass[arguments.class] = arguments.color />
+    <cfelse>
+      <cfthrow type="pass.IllegalArgumentException" message="Invalid color #arguments.color#" />
+    </cfif>
   </cffunction>
 
   <!---
