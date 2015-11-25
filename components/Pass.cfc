@@ -410,13 +410,17 @@
     Adds a new barcode to this pass
 
     @param format the format of the barcode to be added
-    @param message
-    @param messageEncoding
+    @param message the message or the payload to be displayed as a barcode
+    @param messageEncoding the text encoding that is used to render the barcode
+                           (optional, default value is "ISO-8859-1")
+    @param altText the text displayed near the barcode
+                   (optional)
   --->
   <cffunction name="addBarcode" access="public" returntype="void" output="false">
     <cfargument name="format" type="string" required="true" />
     <cfargument name="message" type="string" required="true" />
     <cfargument name="messageEncoding" type="string" required="false" default="iso-8859-1" />
+    <cfargument name="altText" type="string" required="false" />
 
     <!--- Defined local variables --->
     <cfset var barcode = structNew() />
