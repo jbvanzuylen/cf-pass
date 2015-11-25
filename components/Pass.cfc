@@ -191,29 +191,28 @@
   <!---
     Set the icon for this pass
 
-    @param path the file path of the icon to be set
+    @param source the source of the icon to be set
   --->
   <cffunction name="setIcon" access="public" returntype="void" output="false">
-    <cfargument name="path" type="string" required="true" />
+    <cfargument name="source" type="string" required="true" />
 
     <!--- Defined local variables --->
+    <cfset var content = "" />
     <cfset var image = "" />
     <cfset var dimension = "" />
     <cfset var file = "" />
 
-    <!--- Check if file exists --->
-    <cfif NOT fileExists(arguments.path)>
-      <cfthrow type="pass.FileNotFoundException" message="File #arguments.path# not found" />
-    </cfif>
+    <!--- Get the content --->
+    <cfset content = getBinaryContent(arguments.source) />
 
     <!--- Create icon image (normal size) --->
-    <cfset image = imageRead(arguments.path) />
+    <cfset image = imageNew(content) />
     <cfset dimension = variables.imageDimension["icon"] />
     <cfset imageScaleToFit(image, dimension.width, dimension.height) />
     <cfset imageWrite(image, variables.dir & server.separator.file & "icon.png") />
 
     <!--- Create icon image (double size) --->
-    <cfset image = imageRead(arguments.path) />
+    <cfset image = imageNew(content) />
     <cfset dimension = variables.imageDimension["icon@2x"] />
     <cfset imageScaleToFit(image, dimension.width, dimension.height) />
     <cfset imageWrite(image, variables.dir & server.separator.file & "icon@2x.png") />
@@ -222,32 +221,57 @@
   <!---
     Sets the logo of this pass
 
-    @param path the file path of the logo to be set
+    @param source the source of the logo to be set
   --->
   <cffunction name="setLogo" access="public" returntype="void" output="false">
-    <cfargument name="path" type="string" required="true" />
+    <cfargument name="source" type="string" required="true" />
 
     <!--- Defined local variables --->
+    <cfset var content = "" />
     <cfset var image = "" />
     <cfset var dimension = "" />
     <cfset var file = "" />
 
-    <!--- Check if file exists --->
-    <cfif NOT fileExists(arguments.path)>
-      <cfthrow type="pass.FileNotFoundException" message="File #arguments.path# not found" />
-    </cfif>
+    <!--- Get the content --->
+    <cfset content = getBinaryContent(arguments.source) />
 
     <!--- Create logo image (normal size) --->
-    <cfset image = imageRead(arguments.path) />
+    <cfset image = imageNew(content) />
     <cfset dimension = variables.imageDimension["logo"] />
     <cfset imageScaleToFit(image, dimension.width, dimension.height) />
     <cfset imageWrite(image, variables.dir & server.separator.file & "logo.png") />
 
     <!--- Create logo image (double size) --->
-    <cfset image = imageRead(arguments.path) />
+    <cfset image = imageNew(content) />
     <cfset dimension = variables.imageDimension["logo@2x"] />
     <cfset imageScaleToFit(image, dimension.width, dimension.height) />
     <cfset imageWrite(image, variables.dir & server.separator.file & "logo@2x.png") />
+  </cffunction>
+
+  <!---
+    Retrieves the binary content of the specified source
+
+    @param source the source from which the content is to be queried
+
+    @return the binary content of the given source
+  --->
+  <cffunction name="getBinaryContent" acces="private" returntype="binary" output="false">
+    <cfargument name="source" type="string" required="true" />
+
+    <!--- Defined local variables --->
+    <cfset var response = "" />
+
+    <!--- Get the source --->
+    <cfif isValid("URL", arguments.source)>
+      <!--- Download content --->
+      <cfhttp url="#arguments.source#" getasbinary="yes" throwonerror="true" result="response" />
+      <cfreturn response.filecontent />
+    <cfelseif fileExists(arguments.source)>
+      <!--- Read content --->
+      <cfreturn fileReadBinary(arguments.source) />
+    <cfelse>
+      <cfthrow type="pass.IllegalArgumentException" message="Invalid source #arguments.source#" />
+    </cfif>
   </cffunction>
 
   <!---
