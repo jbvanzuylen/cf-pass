@@ -399,8 +399,10 @@
       <cfset passFields[arguments.category] = arrayNew(1) />
     </cfif>
 
-    <!--- Build structure --->
-    <cfset structAppend(field, arguments) />
+    <!--- Build field structure --->
+    <cfset field["key"] = arguments.key />
+    <cfset field["label"] = arguments.label />
+    <cfset field["value"] = arguments.value />
 
     <!--- Add field to list --->
     <cfset arrayAppend(passFields[arguments.category], field) />
@@ -435,8 +437,13 @@
       <cfset variables.pass["barcodes"] = arrayNew(1) />
     </cfif>
 
-    <!--- Build structure --->
-    <cfset structAppend(barcode, arguments) />
+    <!--- Build barcode structure --->
+    <cfset barcode["format"] = arguments.format />
+    <cfset barcode["message"] = arguments.message />
+    <cfset barcode["messageEncoding"] = arguments.messageEncoding />
+    <cfif structKeyExists(arguments, "altText") AND (NOT isNull(arguments.altText))>
+      <cfset barcode["altText"] = arguments.altText />
+    </cfif>
 
     <!--- Add primary field to list --->
     <cfset arrayAppend(variables.pass["barcodes"], barcode) />
@@ -464,8 +471,15 @@
       <cfset variables.pass["locations"] = arrayNew(1) />
     </cfif>
 
-    <!--- Build structure --->
-    <cfset structAppend(location, arguments) />
+    <!--- Build location structure --->
+    <cfset location["longitude"] = arguments.longitude />
+    <cfset location["latitude"] = arguments.latitude />
+    <cfif structKeyExists(arguments, "altitude") AND (NOT isNull(arguments.altitude))>
+      <cfset location["altitude"] = arguments.altitude />
+    </cfif>
+    <cfif structKeyExists(arguments, "relevantText") AND (NOT isNull(arguments.relevantText))>
+      <cfset location["relevantText"] = arguments.relevantText />
+    </cfif>
 
     <!--- Add primary field to list --->
     <cfset arrayAppend(variables.pass["locations"], location) />
