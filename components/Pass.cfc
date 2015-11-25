@@ -416,7 +416,7 @@
   <cffunction name="addBarcode" access="public" returntype="void" output="false">
     <cfargument name="format" type="string" required="true" />
     <cfargument name="message" type="string" required="true" />
-    <cfargument name="messageEncoding" type="string" required="false" />
+    <cfargument name="messageEncoding" type="string" required="false" default="iso-8859-1" />
 
     <!--- Defined local variables --->
     <cfset var barcode = structNew() />
