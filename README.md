@@ -6,7 +6,7 @@ __A pass generation library for Coldfusion__
 
 ### Railo
 
-Download the latest version [here](https://github.com/jbvanzuylen/cf-pass/releases/download/v0.1.0/cf-pass-ext.zip)
+Download the latest version [here](https://github.com/jbvanzuylen/cf-pass/releases/download/v0.2.0/cf-pass-ext.zip)
 
 __Install as an extension__
 
