@@ -450,6 +450,18 @@
   </cffunction>
 
   <!---
+    Set the date and time when the pass expires
+
+    @param expirationDate the expiration date and time to be set
+  --->
+  <cffunction name="setExpirationDate" access="public" returntype="void" output="false">
+    <cfargument name="expirationDate" type="date" required="true" />
+
+    <!--- Set expiration date --->
+    <cfset variables.pass["expirationDate"] = formatDateTime(arguments.expirationDate) />
+  </cffunction>
+
+  <!---
     Adds a new location to this pass
 
     @param longitude
@@ -495,6 +507,29 @@
 
     <!--- Set maximum distance --->
     <cfset variables.pass["maxDistance"] = arguments.maxDistance />
+  </cffunction>
+
+  <!---
+    Formats the specified date/time
+
+    @param datetime the date and time to be formatted
+
+    @returns a formatted string representing the given date/time
+  --->
+  <cffunction name="formatDateTime" access="private" returntype="string" output="false">
+    <cfargument name="datetime" type="date" required="true" />
+
+    <!--- Defined local variables --->
+    <cfset var dtFormat = createObject("java", "java.text.SimpleDateFormat") />
+
+    <!--- Check datetime --->
+    <cfif NOT isDate(arguments.datetime)>
+      <cfthrow type="IllegalArgumentException" message="Invalid date" />
+    </cfif>
+
+    <!--- Executing the formatting --->
+    <cfset dtFormat.applyPattern("yyyy-MM-dd'T'HH:mm") />
+    <cfreturn dtFormat.format(arguments.datetime) />
   </cffunction>
 
   <!---
