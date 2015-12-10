@@ -486,6 +486,18 @@
   </cffunction>
 
   <!---
+    Set the maximum distance in meters from a relevant location that the pass is relevant
+
+    @param maxDistance the maximum distance to be set
+  --->
+  <cffunction name="setMaxDistance" access="public" returntype="void" output="false">
+    <cfargument name="maxDistance" type="numeric" required="true" />
+
+    <!--- Set maximum distance --->
+    <cfset variables.pass["maxDistance"] = arguments.maxDistance />
+  </cffunction>
+
+  <!---
     Build this pass
 
     @param keyStoreFilePath the path to the keystore file
