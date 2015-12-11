@@ -453,12 +453,14 @@
     Set the date and time when the pass expires
 
     @param expirationDate the expiration date and time to be set
+    @param offset the offset in milliseconds from the UTC timezone of the expiration time
   --->
   <cffunction name="setExpirationDate" access="public" returntype="void" output="false">
     <cfargument name="expirationDate" type="date" required="true" />
+    <cfargument name="offset" type="numeric" required="true" />
 
     <!--- Set expiration date --->
-    <cfset variables.pass["expirationDate"] = formatDateTime(arguments.expirationDate) />
+    <cfset variables.pass["expirationDate"] = formatDateTime(arguments.expirationDate, arguments.offset) />
   </cffunction>
 
   <!---
@@ -513,14 +515,19 @@
     Formats the specified date/time
 
     @param datetime the date and time to be formatted
+    @param offset the offset in milliseconds from the UTC timezone of the time
 
     @returns a formatted string representing the given date/time
   --->
   <cffunction name="formatDateTime" access="private" returntype="string" output="false">
     <cfargument name="datetime" type="date" required="true" />
+    <cfargument name="offset" type="numeric" required="true" />
 
     <!--- Defined local variables --->
     <cfset var dtFormat = createObject("java", "java.text.SimpleDateFormat") />
+    <cfset var dtString = "" />
+    <cfset var hour = "" />
+    <cfset var min = "" />
 
     <!--- Check datetime --->
     <cfif NOT isDate(arguments.datetime)>
@@ -529,7 +536,14 @@
 
     <!--- Executing the formatting --->
     <cfset dtFormat.applyPattern("yyyy-MM-dd'T'HH:mm") />
-    <cfreturn dtFormat.format(arguments.datetime) />
+    <cfset dtString = dtFormat.format(arguments.datetime) />
+
+    <!--- Add timezone info --->
+    <cfset hour = numberFormat(fix(offset / 3600000), "00") />
+    <cfset min = right(numberFormat(fix(offset / 60000) - (hour * 60), "00"), 2) />
+    <cfset dtString = dtString & hour & ":" & min />
+
+    <cfreturn dtString />
   </cffunction>
 
   <!---
