@@ -526,8 +526,8 @@
     <!--- Defined local variables --->
     <cfset var dtFormat = createObject("java", "java.text.SimpleDateFormat") />
     <cfset var dtString = "" />
-    <cfset var hour = "" />
-    <cfset var min = "" />
+    <cfset var hour = 0 />
+    <cfset var min = 0 />
 
     <!--- Check datetime --->
     <cfif NOT isDate(arguments.datetime)>
@@ -539,9 +539,9 @@
     <cfset dtString = dtFormat.format(arguments.datetime) />
 
     <!--- Add timezone info --->
-    <cfset hour = numberFormat(fix(offset / 3600000), "00") />
-    <cfset min = right(numberFormat(fix(offset / 60000) - (hour * 60), "00"), 2) />
-    <cfset dtString = dtString & hour & ":" & min />
+    <cfset hour = fix(offset / 3600000) />
+    <cfset min = fix(offset / 60000) - (hour * 60) />
+    <cfset dtString = dtString & numberFormat(hour, "+00") & ":" & right(numberFormat(min, "00"), 2) />
 
     <cfreturn dtString />
   </cffunction>
