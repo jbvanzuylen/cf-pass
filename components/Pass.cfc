@@ -197,6 +197,23 @@
   </cffunction>
 
   <!---
+    Set some custom information for companion apps to this pass
+
+    @param userInfo the custom information to be set
+  --->
+  <cffunction name="setUserInfo" access="public" returntype="void" output="false">
+    <cfargument name="userInfo" type="string" required="true" />
+
+    <!--- Check if JSON --->
+    <cfif NOT isJSON(arguments.userInfo)>
+      <cfthrow type="pass.IllegalArgumentException" message="Invalid JSON data" />
+    </cfif>
+
+    <!--- Set user info --->
+    <cfset variables.pass["userInfo"] = deserializeJSON(arguments.userInfo) />
+  </cffunction>
+
+  <!---
     Set the icon for this pass
 
     @param source the source of the icon to be set
