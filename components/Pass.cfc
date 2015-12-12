@@ -524,6 +524,20 @@
   </cffunction>
 
   <!---
+    Set the date and time when the pass becomes relevant
+
+    @param relevantDate the expiration date and time to be set
+    @param offset the offset in milliseconds from the UTC timezone of the relevant time
+  --->
+  <cffunction name="setRelevantDate" access="public" returntype="void" output="false">
+    <cfargument name="relevantDate" type="date" required="true" />
+    <cfargument name="offset" type="numeric" required="true" />
+
+    <!--- Set relevant date --->
+    <cfset variables.pass["relevantDate"] = formatDateTime(arguments.relevantDate, arguments.offset) />
+  </cffunction>
+
+  <!---
     Formats the specified date/time
 
     @param datetime the date and time to be formatted
