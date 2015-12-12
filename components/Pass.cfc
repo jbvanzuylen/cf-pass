@@ -464,6 +464,18 @@
   </cffunction>
 
   <!---
+    Set flag to indicate if the pass is void
+
+    @param voided true if the pass is void, false otherwise
+  --->
+  <cffunction name="setVoided" access="public" returntype="void" output="false">
+    <cfargument name="voided" type="boolean" required="true" />
+
+    <!--- Set voided flag --->
+    <cfset variables.pass["voided"] = arguments.voided />
+  </cffunction>
+
+  <!---
     Adds a new location to this pass
 
     @param longitude
