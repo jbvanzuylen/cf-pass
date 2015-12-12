@@ -21,6 +21,14 @@
   <cfset variables.barcodeFormats[3] = "PKBarcodeFormatAztec" />
   <cfset variables.barcodeFormats[4] = "PKBarcodeFormatCode128" />
 
+  <!--- The list of valid transit type --->
+  <cfset variables.transitTypes = arrayNew(1) />
+  <cfset variables.transitTypes[1] = "PKTransitTypeAir" />
+  <cfset variables.transitTypes[2] = "PKTransitTypeBoat" />
+  <cfset variables.transitTypes[3] = "PKTransitTypeBus" />
+  <cfset variables.transitTypes[4] = "PKTransitTypeGeneric" />
+  <cfset variables.transitTypes[5] = "PKTransitTypeTrain" />
+
   <!---
     Initializes this pass
   --->
@@ -406,6 +414,31 @@
 
     <!--- Add field to list --->
     <cfset arrayAppend(passFields[arguments.category], field) />
+  </cffunction>
+
+  <!---
+    Set the transit type of this boarding pass
+
+    @param transitType the transit type to be set
+  --->
+  <cffunction name="setTransitType" access="public" returntype="void" output="false">
+    <cfargument name="transitType" type="string" required="true" />
+
+    <!--- Defined local variables --->
+    <cfset var passFields = variables.pass[variables.style] />
+
+    <!--- Check if boarding pass --->
+    <cfif variables.style neq "boardingPass">
+      <cfthrow type="pass.UnsupportedOperationException" message="Only supported for boarding passes" />
+    </cfif>
+
+    <!--- Check transit type --->
+    <cfif NOT arrayContains(variables.transitTypes, arguments.transitType)>
+      <cfthrow type="pass.IllegalArgumentException" message="Invalid transit type #arguments.transitType#" />
+    </cfif>
+
+    <!--- Add field to list --->
+    <cfset passFields["transitType"] = arguments.transitType />
   </cffunction>
 
   <!---
