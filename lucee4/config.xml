@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <info>
+    <type>web</type>
+    <id>AA5BAACB-732E-4F84-96BA6AABB0F908F0</id>
+    <name>cfpass</name>
+    <label>pass generation library</label>
+    <description>Library to generate passes</description>
+    <version>@VERSION@</version>
+    <image>https://raw.github.com/jbvanzuylen/cf-pass/master/railo/pass-logo.png</image>
+    <author>Jean-Bernard van Zuylen</author>
+    <support>https://github.com/jbvanzuylen/cf-passs/issues</support>
+    <created>@RELEASE_DATE@</created>
+  </info>
+</config>
