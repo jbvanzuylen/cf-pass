@@ -6,10 +6,10 @@
     <name>cfpass</name>
     <label>pass generation library</label>
     <description>Library to generate passes</description>
-    <version>@VERSION@</version>
-    <image>https://raw.github.com/jbvanzuylen/cf-pass/master/railo/pass-logo.png</image>
+    <version>${pom.version}</version>
+    <image>https://raw.githubusercontent.com/jbvanzuylen/cf-pass/master/logo.png</image>
     <author>Jean-Bernard van Zuylen</author>
     <support>https://github.com/jbvanzuylen/cf-passs/issues</support>
-    <created>@RELEASE_DATE@</created>
+    <created>${ext.release.date}</created>
   </info>
 </config>

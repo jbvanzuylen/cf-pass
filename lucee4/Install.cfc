@@ -4,8 +4,8 @@
 
   <!--- Libraries --->
   <cfset variables.libraries = array(
-    "bcpkix-jdk15on-153.jar",
-    "bcprov-jdk15on-153.jar",
+    "bcpkix-jdk15on-1.53.jar",
+    "bcprov-jdk15on-1.53.jar",
     "pass-utils.jar"
   ) />
 

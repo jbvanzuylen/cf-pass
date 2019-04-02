@@ -55,7 +55,7 @@ public class PassUtils
   private PassUtils()
   {
   }
-  
+
   public static void createSignature(final String directoryPath, final String keyStoreFilePath, final String keyStorePassword) throws Exception
   {
     // Add BC provider
@@ -63,14 +63,14 @@ public class PassUtils
     {
       Security.addProvider(new BouncyCastleProvider());
     }
-    
+
     // Check directory
     final File directory = new File(directoryPath);
     if (directory.exists() && !directory.isDirectory())
     {
       throw new IllegalArgumentException(directoryPath + " is not a directory");
     }
-    
+
     // Check manifest file
     final File manifest = new File(directory, "manifest.json");
     if (manifest.exists() && !manifest.isFile())
@@ -84,7 +84,7 @@ public class PassUtils
     {
       throw new IllegalArgumentException("Keystore not found");
     }
-    
+
     // Load key store
     final FileInputStream clientStoreIn = new FileInputStream(keyStore);
     final KeyStore clientStore = KeyStore.getInstance("PKCS12");
@@ -105,7 +105,7 @@ public class PassUtils
     final X509Certificate cert = (X509Certificate) clientStore.getCertificate(alias);
 
     // Load Apple certificate
-    final InputStream appleCertIn = PassUtils.class.getResourceAsStream("/resources/AppleWWDRCA.cer");
+    final InputStream appleCertIn = PassUtils.class.getResourceAsStream("/AppleWWDRCA.cer");
     final CertificateFactory appleCertFactory = CertificateFactory.getInstance("X.509");
     final X509Certificate appleCert = (X509Certificate) appleCertFactory.generateCertificate(appleCertIn);
 
