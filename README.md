@@ -6,7 +6,7 @@ __A pass generation library for Coldfusion__
 
 ### Lucee 4
 
-Download the latest version [here](https://github.com/jbvanzuylen/cf-pass/releases/download/v0.3.0/cf-pass-ext.zip)
+Download the latest version [here](https://github.com/jbvanzuylen/cf-pass/releases/download/v1.0.0/cf-pass-lucee4-ext.zip)
 
 __Install as an extension__
 
