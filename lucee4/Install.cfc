@@ -1,12 +1,12 @@
 <cfcomponent displayname="Install" output="false">
   <!--- Extension name --->
-  <cfset variables.name = "cfpass" />
+  <cfset variables.name = "cf-pass" />
 
   <!--- Libraries --->
   <cfset variables.libraries = array(
     "bcpkix-jdk15on-1.66.jar",
     "bcprov-jdk15on-1.66.jar",
-    "pass-utils.jar"
+    "cf-pass-1.0.0.jar"
   ) />
 
   <!---

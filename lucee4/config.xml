@@ -3,9 +3,9 @@
   <info>
     <type>web</type>
     <id>AA5BAACB-732E-4F84-96BA6AABB0F908F0</id>
-    <name>cfpass</name>
-    <label>pass generation library</label>
-    <description>Library to generate passes</description>
+    <name>${pom.name}</name>
+    <label>${pom.description}</label>
+    <description>${pom.description}</description>
     <version>${pom.version}</version>
     <image>https://raw.githubusercontent.com/jbvanzuylen/cf-pass/master/logo.png</image>
     <author>Jean-Bernard van Zuylen</author>

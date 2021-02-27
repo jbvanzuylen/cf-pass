@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Built-Date: ${ext.release.date}
-release-type: web
 id: "AA5BAACB-732E-4F84-96BA6AABB0F908F0"
+name: "${pom.name}"
+description: "${pom.description}"
 version: "${pom.version}"
-name: "cfpass"
-description: "Library to generate passes"
 author: "Jean-Bernard van Zuylen"
+release-type: web
 start-bundles: false
